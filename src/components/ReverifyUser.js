@@ -1,8 +1,3 @@
-
-export const ReVerifyUser=()=>{
-    return(
-        <>
-        ReVerifyUser Page
-        </>
-    )
-}
+export const ReVerifyUser = () => {
+  return <>ReVerifyUser Page</>;
+};

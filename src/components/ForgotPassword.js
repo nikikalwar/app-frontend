@@ -1,8 +1,3 @@
-
-export const ForgotPassword=()=>{
-    return(
-        <>
-        ForgotPassword Page
-        </>
-    )
-}
+export const ForgotPassword = () => {
+  return <>ForgotPassword Page</>;
+};
