@@ -1,5 +1,5 @@
 export const Slider=()=>{
     return(<>
-    <h1>Slider</h1>
+    <h1>Slider modified</h1>
     </>)
 }
