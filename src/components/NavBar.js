@@ -3,7 +3,7 @@ import logo from "../images/logo.png";
 export const NavBar = () => {
   return (
     <>
-      <nav className="flex justify-between items-center bg-gray-800 w-full h-18 p-2">
+      <nav className="flex justify-between items-center bg-gray-400 w-full h-18 p-2">
         <Link to="/">
           <div className="w-[80px] h-[80px]">
             <img src={logo} alt="logo" className="object-cover p-2" />
