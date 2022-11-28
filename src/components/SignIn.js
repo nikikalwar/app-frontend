@@ -1,8 +1,14 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const SignIn = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+
+  // handleSignin
+  const handleSignin = () => {
+    console.log("handle sign in button ");
+  };
   return (
     <>
       <form className="min-h-screen py-40  ">
@@ -28,29 +34,47 @@ export const SignIn = () => {
               Log in to Your Account for Orders and Bookings
             </p>
             <div className="flex flex-col gap-3 ">
-              <input
-                className="p-2 border-gray-400 border rounded-md"
-                type="email"
-                value={Email}
-                placeholder="Enter Email Address"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                className="p-2 border-gray-400 border rounded-md"
-                type="password"
-                value={Password}
-                placeholder="Enter Password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <div>
+              <div className="flex flex-col">
                 <input
-                  type="checkbox"
-                  className="border border-gray-200 mx-1"
+                  className="p-2 border-gray-400 border rounded-md"
+                  type="email"
+                  value={Email}
+                  placeholder="Enter Email Address"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
-                <span className="font-semibold">Remember Me</span>
+                <span className="text-red-300 ">*Mandatory fields</span>
+              </div>
+              <div className="flex flex-col">
+                <input
+                  className="p-2 border-gray-400 border rounded-md"
+                  type="password"
+                  value={Password}
+                  placeholder="Enter Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <span className="text-red-300 ">*Mandatory fields</span>
+              </div>
+              <div className="flex justify-between">
+                <div>
+                  <input
+                    type="checkbox"
+                    className="border border-gray-200 mx-1"
+                  />
+                  <span className="font-semibold text-gray-500">
+                    Remember Me
+                  </span>
+                </div>
+                <Link to="/forgotpassword">
+                  <p className="text-gray-500 underline hover:text-gray-700">
+                    Forgot Password ?
+                  </p>
+                </Link>
               </div>
 
-              <button className=" py-2 bg-gradient-to-r from-violet-500 to-gray-300 text-gray-600 font-bold rounded-lg">
+              <button
+                onClick={handleSignin}
+                className=" py-2 bg-gradient-to-r from-violet-500 to-gray-300 text-gray-600 font-bold rounded-lg"
+              >
                 Sign In
               </button>
             </div>

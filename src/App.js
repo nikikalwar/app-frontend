@@ -6,6 +6,7 @@ import { ReVerifyUser } from "./components/ReverifyUser";
 import { ForgotPassword } from "./components/ForgotPassword";
 import { SignIn } from "./components/SignIn";
 import { NavBar } from "./components/NavBar";
+
 import Footer from "./components/Footer";
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/reverify-user" element={<ReVerifyUser />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/signin" element={<SignIn />} />
         </Routes>
         <Footer />

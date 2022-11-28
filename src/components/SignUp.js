@@ -7,18 +7,23 @@ export const SignUp = () => {
   const [Mobileno, setMobileno] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const [Checked, setChecked] = useState(false);
+  const [Checked, setChecked] = useState();
+  const [error, seterror] = useState();
 
-  const handleSubmit = () => {
-    let body = {
-      name: Name,
-      age: Age,
-      mobileno: Mobileno,
-      email: Email,
-      password: Password,
-    };
-
-    postSignUp(body);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if ((Checked, Name, Age, Mobileno, Email, Password)) {
+      let body = {
+        name: Name,
+        age: Age,
+        mobileno: Mobileno,
+        email: Email,
+        password: Password,
+      };
+      postSignUp(body);
+    } else {
+      seterror(true);
+    }
   };
 
   const postSignUp = async (body) => {
@@ -54,62 +59,81 @@ export const SignUp = () => {
               Create Your Account. It's free and only takes a minute.
             </p>
             <div className="flex flex-col gap-3 ">
-              <input
-                className="p-2 border-gray-400 border rounded-md "
-                type="text"
-                placeholder="Enter FullName"
-                value={Name}
-                onChange={(e) => setName(e.target.value)}
-              />
-
-              <input
-                className="p-2 border-gray-400 border rounded-md "
-                type="number"
-                placeholder="Enter Age"
-                value={Age}
-                onChange={(e) => setAge(e.target.value)}
-              />
-
-              <input
-                className="p-2 border-gray-400 border rounded-md "
-                type="tel"
-                placeholder="Enter Mobile No."
-                value={Mobileno}
-                onChange={(e) => setMobileno(e.target.value)}
-              />
-
-              <input
-                className="p-2 border-gray-400 border rounded-md"
-                type="email"
-                placeholder="Enter Email Address"
-                value={Email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-
-              <input
-                className="p-2 border-gray-400 border rounded-md"
-                type="password"
-                placeholder="Choose Password"
-                value={Password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <div>
+              <div className="flex flex-col">
                 <input
-                  type="checkbox"
-                  className="  border border-gray-400 mx-2"
-                  value={Checked}
-                  onChange={() => setChecked(!Checked)}
+                  className="p-2 border-gray-400 border rounded-md "
+                  type="text"
+                  placeholder="Enter FullName"
+                  value={Name}
+                  onChange={(e) => setName(e.target.value)}
                 />
-                <span>
-                  I accept the
-                  <span className="text-blue-600 font-semibold mx-1 cursor-pointer">
-                    Terms of Use
+                <span className="text-red-300 ">*Mandatory fields</span>
+              </div>
+              <div className="flex flex-col">
+                <input
+                  className="p-2 border-gray-400 border rounded-md "
+                  type="number"
+                  placeholder="Enter Age"
+                  value={Age}
+                  onChange={(e) => setAge(e.target.value)}
+                />
+                <span className="text-red-300">*Mandatory Fields</span>
+              </div>
+              <div className="flex flex-col">
+                <input
+                  className="p-2 border-gray-400 border rounded-md "
+                  type="tel"
+                  placeholder="Enter Mobile No."
+                  value={Mobileno}
+                  onChange={(e) => setMobileno(e.target.value)}
+                />
+                <span className="text-red-300">*Mandatory Fields</span>
+              </div>
+              <div className="flex flex-col">
+                <input
+                  className="p-2 border-gray-400 border rounded-md"
+                  type="email"
+                  placeholder="Enter Email Address"
+                  value={Email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <span className="text-red-300">*Mandatory Fields</span>
+              </div>
+              <div className="flex flex-col">
+                <input
+                  className="p-2 border-gray-400 border rounded-md"
+                  type="password"
+                  placeholder="Choose Password"
+                  value={Password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <span className="text-red-300">*Mandatory Fields</span>
+              </div>
+              <div className="flex flex-col">
+                <div>
+                  <input
+                    type="checkbox"
+                    className="  border border-gray-400 mx-2"
+                    value={Checked}
+                    onChange={() => setChecked(!Checked)}
+                  />
+                  <span>
+                    I accept the
+                    <span className="text-blue-600 font-semibold mx-1 cursor-pointer">
+                      Terms of Use
+                    </span>
+                    &
+                    <span className="text-blue-500 font-semibold mx-1 cursor-pointer">
+                      Privacy Policy
+                    </span>
                   </span>
-                  &
-                  <span className="text-blue-500 font-semibold mx-1 cursor-pointer">
-                    Privacy Policy
+                </div>
+
+                {error && (
+                  <span className="text-red-300 ">
+                    *Tick Accept the Terms & Privacy Policy to Register{" "}
                   </span>
-                </span>
+                )}
               </div>
 
               <button
