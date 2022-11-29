@@ -34,18 +34,18 @@ export const Slider = () => {
 
   return (
     <>
-      <div className="w-full select-none relative">
+      <div className="w-full select-none relative  py-[165px]  ">
         <img
           src={FeaturedImage[CurrentIndex]}
           alt="featuredImage"
           className="w-full md:h-[320px] sm:aspect-video object-cover"
         />
-        <div className="absolute w-full top-1/2 flex justify-between items-center  px-3">
+        <div className="absolute w-full top-[300px] flex justify-between items-center  px-3">
           <button onClick={prevButton} className="p-2">
-            <BsFillArrowLeftCircleFill size={24} />
+            <BsFillArrowLeftCircleFill size={24} fill={"white"} />
           </button>
           <button onClick={nextButton} className="p-2">
-            <BsFillArrowRightCircleFill size={24} />
+            <BsFillArrowRightCircleFill size={24} fill="white" />
           </button>
         </div>
       </div>

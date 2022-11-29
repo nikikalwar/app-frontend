@@ -2,7 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 
 export const SignUp = () => {
-  const [Name, setName] = useState("");
+  const [firstname, setfirstname] = useState("");
+  const [lastname, setlastname] = useState("");
   const [Age, setAge] = useState("");
   const [Mobileno, setMobileno] = useState("");
   const [Email, setEmail] = useState("");
@@ -12,9 +13,10 @@ export const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if ((Checked, Name, Age, Mobileno, Email, Password)) {
+    if ((Checked, firstname, lastname, Age, Mobileno, Email, Password)) {
       let body = {
-        name: Name,
+        firstname: firstname,
+        lastname: lastname,
         age: Age,
         mobileno: Mobileno,
         email: Email,
@@ -36,7 +38,7 @@ export const SignUp = () => {
   };
   return (
     <>
-      <form className="min-h-screen py-40  ">
+      <form className="min-h-screen py-52  ">
         {/* left div */}
         <div className="flex mx-auto w-8/12 bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="hidden w-1/2 sm:none md:flex items-center  bg-gradient-to-r from-violet-500 to-gray-300 p-12">
@@ -60,13 +62,23 @@ export const SignUp = () => {
             </p>
             <div className="flex flex-col gap-3 ">
               <div className="flex flex-col">
-                <input
-                  className="p-2 border-gray-400 border rounded-md "
-                  type="text"
-                  placeholder="Enter FullName"
-                  value={Name}
-                  onChange={(e) => setName(e.target.value)}
-                />
+                <div className="flex justify-center gap-5">
+                  <input
+                    className="p-2 border-gray-400 border rounded-md "
+                    type="text"
+                    placeholder="FIRST NAME"
+                    value={firstname}
+                    onChange={(e) => setfirstname(e.target.value)}
+                  />
+                  <input
+                    className="p-2 border-gray-400 border rounded-md "
+                    type="text"
+                    placeholder="LAST NAME"
+                    value={lastname}
+                    onChange={(e) => setlastname(e.target.value)}
+                  />
+                </div>
+
                 <span className="text-red-300 ">*Mandatory fields</span>
               </div>
               <div className="flex flex-col">

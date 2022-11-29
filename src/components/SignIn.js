@@ -11,7 +11,7 @@ export const SignIn = () => {
   };
   return (
     <>
-      <form className="min-h-screen py-40  ">
+      <form className="min-h-screen py-52  ">
         {/* left div */}
         <div className="flex mx-auto w-8/12 bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="hidden w-1/2 sm:none md:flex items-center  bg-gradient-to-r from-violet-500 to-gray-300 p-12">

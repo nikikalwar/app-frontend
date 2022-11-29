@@ -1,4 +1,4 @@
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
 import logo1 from "../images/logo1.jpg";
@@ -41,12 +41,14 @@ export const NavBar = () => {
   ];
   return (
     <>
-      <nav className="flex justify-between items-center bg-gray-200 w-full h-[100px] p-2 ">
+      <nav className="flex justify-between  items-center bg-gray-200 w-full h-[100px] p-2 shadow-lg  fixed z-50">
         {/* Header FirstRow */}
         <div className=" flex items-center w-1/3 justify-around">
-          <h1 className="text-3xl text-green-500 font-extrabold p-2">
-            Ausadhi
-          </h1>
+          <Link to="/">
+            <h1 className="text-3xl text-green-500 font-extrabold p-2">
+              Ausadhi
+            </h1>
+          </Link>
           <div className="ml-10 hidden md:block ">
             <p className="text-gray-600 font-light">Express Delivery to </p>
             <div className="flex items-center  cursor-pointer">
@@ -80,9 +82,17 @@ export const NavBar = () => {
               <div className="md:flex hidden items-center">
                 <p className="mx-2 font-bold">
                   Hello,
-                  <span className="cursor-pointer font-normal pl-1">
-                    Log In
-                  </span>
+                  <Link to="signin">
+                    <span className="cursor-pointer font-normal pl-1">
+                      Log In
+                    </span>
+                  </Link>
+                  <span className="text-gray-400 ml-1">||</span>
+                  <Link to="/signup">
+                    <span className="cursor-pointer font-normal pl-1">
+                      SignUp
+                    </span>
+                  </Link>
                 </p>
                 <span className="text-red-400 text-3xl font-bold mb-[30px]">
                   .
@@ -109,7 +119,7 @@ export const NavBar = () => {
           )}
         </div>
       </nav>
-      <div className="w-full h-16 bg-white flex justify-center items-center gap-10 ">
+      <div className="w-full h-16 bg-white flex justify-center items-center fixed top-[100px] z-50 gap-10 ">
         {categories.map(({ title, icon }, index) => (
           <div key="index">
             <div className="hidden md:flex items-center gap-1 cursor-pointer hover:scale-105">
