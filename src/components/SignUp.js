@@ -8,12 +8,33 @@ export const SignUp = () => {
   const [Mobileno, setMobileno] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const [Checked, setChecked] = useState();
+  const [Checked, setChecked] = useState(false);
   const [error, seterror] = useState();
+
+  //regex to validate inputs
+  const NAME_REGEX=/[0-9!@#$%^&*()_+=?]/;
+  const PHONE_REGEX=/[a-zA-Z!@#$%^&*()_+/]/;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if ((Checked, firstname, lastname, Age, Mobileno, Email, Password)) {
+    const validateInputs=()=>{
+      if(!Checked){
+          alert("please click the checkbox");
+      }
+      else if(Age<10){
+        alert("Please enter the age value above 10")
+      }
+      else if(firstname.length<1){
+        alert("Please enter the firstName")
+      }
+      else if(lastname.length<1){
+        alert("please enter the last name")
+      }
+      else return 1
+    }
+   
+    
+    if (validateInputs()) {
       let body = {
         firstname: firstname,
         lastname: lastname,
@@ -22,12 +43,25 @@ export const SignUp = () => {
         email: Email,
         password: Password,
       };
-      postSignUp(body);
+      console.log(body);
+    //  postSignUp(body);
+        simplePost(body);
     } else {
       seterror(true);
     }
   };
 
+  const simplePost=async(data)=>{
+    const response = await fetch("http://localhost:3006/user-save", {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      //  Authorization: `Bearer: ${token}`,
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+});
+  }
   const postSignUp = async (body) => {
     try {
       const signUp = await axios.post("http://localhost:3006/user-save", body);
@@ -68,18 +102,38 @@ export const SignUp = () => {
                     type="text"
                     placeholder="FIRST NAME"
                     value={firstname}
-                    onChange={(e) => setfirstname(e.target.value)}
+                    onChange={(e) => {
+                      if(!NAME_REGEX.test(e.target.value)){
+                        setfirstname(e.target.value);
+                        const x=document.querySelector('.name-error')
+                        x.style.visibility="hidden";
+                      }
+                      else{
+                        document.querySelector('.name-error').style.visibility=""
+                     //   x.style.visibility="block";
+                      }
+                    }}
                   />
                   <input
                     className="p-2 border-gray-400 border rounded-md "
                     type="text"
                     placeholder="LAST NAME"
                     value={lastname}
-                    onChange={(e) => setlastname(e.target.value)}
+                    onChange={(e) => {
+                      if(!NAME_REGEX.test(e.target.value)){
+                        setlastname(e.target.value);
+                        const x=document.querySelector('.name-error')
+                        x.style.visibility="hidden";
+                      }
+                      else{
+                        document.querySelector('.name-error').style.visibility=""
+                     //   x.style.visibility="block";
+                      }
+                    }}
                   />
                 </div>
 
-                <span className="text-red-300 ">*Mandatory fields</span>
+                <span className="text-red-300 name-error" style={{"visibility":"hidden"}}>*Invalid characters not allowed</span>
               </div>
               <div className="flex flex-col">
                 <input
@@ -87,9 +141,10 @@ export const SignUp = () => {
                   type="number"
                   placeholder="Enter Age"
                   value={Age}
+                  min={1}
                   onChange={(e) => setAge(e.target.value)}
                 />
-                <span className="text-red-300">*Mandatory Fields</span>
+                <span className="text-red-300 age-error" style={{"visibility":"hidden"}}>*Mandatory Fields</span>
               </div>
               <div className="flex flex-col">
                 <input
@@ -97,9 +152,18 @@ export const SignUp = () => {
                   type="tel"
                   placeholder="Enter Mobile No."
                   value={Mobileno}
-                  onChange={(e) => setMobileno(e.target.value)}
+                  onChange={(e) => {
+                    if(!PHONE_REGEX.test(e.target.value)){
+                      setMobileno(e.target.value);
+                      document.querySelector('.phone-error').style.visibility="hidden"
+                    }
+                    else{
+                      console.log("invalid input",e.target.value)
+                      document.querySelector('.phone-error').style.visibility=""
+                    }
+                  }}
                 />
-                <span className="text-red-300">*Mandatory Fields</span>
+                <span className="text-red-300 phone-error" style={{"visibility":"hidden"}}>*Mandatory Fields</span>
               </div>
               <div className="flex flex-col">
                 <input
@@ -109,7 +173,7 @@ export const SignUp = () => {
                   value={Email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <span className="text-red-300">*Mandatory Fields</span>
+                <span className="text-red-300 email-error" style={{"visibility":"hidden"}}>*Mandatory Fields</span>
               </div>
               <div className="flex flex-col">
                 <input
@@ -119,7 +183,7 @@ export const SignUp = () => {
                   value={Password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <span className="text-red-300">*Mandatory Fields</span>
+                <span className="text-red-300 password-error" style={{"visibility":"hidden"}}>*Mandatory Fields</span>
               </div>
               <div className="flex flex-col">
                 <div>
