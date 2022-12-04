@@ -36,14 +36,13 @@ export const SignUp = () => {
     
     if (validateInputs()) {
       let body = {
-        firstname: firstname,
-        lastname: lastname,
+        firstName: firstname,
+        lastName: lastname,
         age: Age,
-        mobileno: Mobileno,
+        phone: Mobileno,
         email: Email,
         password: Password,
       };
-      console.log(body);
     //  postSignUp(body);
         simplePost(body);
     } else {
@@ -52,15 +51,20 @@ export const SignUp = () => {
   };
 
   const simplePost=async(data)=>{
-    const response = await fetch("http://localhost:3006/user-save", {
-    method: "POST",
-    mode: "cors",
-    headers: {
-      //  Authorization: `Bearer: ${token}`,
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-});
+  try{
+    const response = await fetch("http://localhost:3006/users/save-user", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        //  Authorization: `Bearer: ${token}`,
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+  });
+  alert("User SignUp successfull")
+  }catch(err){
+    alert("error in signing up")
+  }
   }
   const postSignUp = async (body) => {
     try {
