@@ -21,14 +21,21 @@ export const SignUp = () => {
       if(!Checked){
           alert("please click the checkbox");
       }
-      else if(Age<10){
+   /*   else if(Age<10){
         alert("Please enter the age value above 10")
-      }
+      } */
+
       else if(firstname.length<1){
         alert("Please enter the firstName")
       }
       else if(lastname.length<1){
         alert("please enter the last name")
+      }
+      else if(Password.length<1){
+        alert("Please enter the Password")
+      }
+      else if(Email.length<1){
+        alert("Please enter the Email")
       }
       else return 1
     }
@@ -61,11 +68,18 @@ export const SignUp = () => {
       },
       body: JSON.stringify(data),
   });
-  alert("User SignUp successfull")
+ // console.log("response",await response.json())
+  let serverResponse=await response.json();
+  console.log(serverResponse,"serverResponse")
+  if(serverResponse.message==='user exists'){
+    alert("User exists, Please signIn or use another email address")
+  }
+  else alert("user sign-up successful",serverResponse.message)
   }catch(err){
     alert("error in signing up")
   }
   }
+
   const postSignUp = async (body) => {
     try {
       const signUp = await axios.post("http://localhost:3006/user-save", body);
