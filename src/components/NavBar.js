@@ -121,7 +121,7 @@ export const NavBar = () => {
       </nav>
       <div className="w-full h-16 bg-white flex justify-center items-center fixed top-[100px] z-50 gap-10 ">
         {categories.map(({ title, icon }, index) => (
-          <div key="index">
+          <div key={index}>
             <div className="hidden md:flex items-center gap-1 cursor-pointer hover:scale-105">
               <p className="text-gray-500">{title}</p>
               <span className="text-gray-700">{icon}</span>
