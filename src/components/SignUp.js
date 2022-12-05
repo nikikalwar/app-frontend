@@ -4,81 +4,73 @@ import axios from "axios";
 export const SignUp = () => {
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
-  const [Age, setAge] = useState("");
-  const [Mobileno, setMobileno] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-  const [Checked, setChecked] = useState(false);
+  const [age, setage] = useState("");
+  const [mobileno, setmobileno] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [checked, setchecked] = useState(false);
   const [error, seterror] = useState();
 
   //regex to validate inputs
-  const NAME_REGEX=/[0-9!@#$%^&*()_+=?]/;
-  const PHONE_REGEX=/[a-zA-Z!@#$%^&*()_+/]/;
+  const NAME_REGEX = /[0-9!@#$%^&*()_+=?]/;
+  const PHONE_REGEX = /[a-zA-Z!@#$%^&*()_+/]/;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validateInputs=()=>{
-      if(!Checked){
-          alert("please click the checkbox");
-      }
-   /*   else if(Age<10){
+    const validateInputs = () => {
+      if (!checked) {
+        alert("please click the checkbox");
+      } else if (firstname.length < 1) {
+        /*   else if(Age<10){
         alert("Please enter the age value above 10")
       } */
+        alert("Please enter the firstName");
+      } else if (lastname.length < 1) {
+        alert("please enter the last name");
+      } else if (password.length < 1) {
+        alert("Please enter the Password");
+      } else if (email.length < 1) {
+        alert("Please enter the Email");
+      } else return 1;
+    };
 
-      else if(firstname.length<1){
-        alert("Please enter the firstName")
-      }
-      else if(lastname.length<1){
-        alert("please enter the last name")
-      }
-      else if(Password.length<1){
-        alert("Please enter the Password")
-      }
-      else if(Email.length<1){
-        alert("Please enter the Email")
-      }
-      else return 1
-    }
-   
-    
     if (validateInputs()) {
       let body = {
         firstName: firstname,
         lastName: lastname,
-        age: Age,
-        phone: Mobileno,
-        email: Email,
-        password: Password,
+        age: age,
+        phone: mobileno,
+        email: email,
+        password: password,
       };
-    //  postSignUp(body);
-        simplePost(body);
+      //  postSignUp(body);
+      simplePost(body);
     } else {
       seterror(true);
     }
   };
 
-  const simplePost=async(data)=>{
-  try{
-    const response = await fetch("http://localhost:3006/users/save-user", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        //  Authorization: `Bearer: ${token}`,
+  const simplePost = async (data) => {
+    try {
+      const response = await fetch("http://localhost:3006/users/save-user", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          //  Authorization: `Bearer: ${token}`,
           "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-  });
- // console.log("response",await response.json())
-  let serverResponse=await response.json();
-  console.log(serverResponse,"serverResponse")
-  if(serverResponse.message==='user exists'){
-    alert("User exists, Please signIn or use another email address")
-  }
-  else alert("user sign-up successful",serverResponse.message)
-  }catch(err){
-    alert("error in signing up")
-  }
-  }
+        },
+        body: JSON.stringify(data),
+      });
+      // console.log("response",await response.json())
+      let serverResponse = await response.json();
+      console.log(serverResponse, "serverResponse");
+      if (serverResponse.message === "user exists") {
+        alert("User exists, Please signIn or use another email address");
+      } else alert("user sign-up successful", serverResponse.message);
+    } catch (err) {
+      alert("error in signing up");
+    }
+  };
 
   const postSignUp = async (body) => {
     try {
@@ -121,14 +113,14 @@ export const SignUp = () => {
                     placeholder="FIRST NAME"
                     value={firstname}
                     onChange={(e) => {
-                      if(!NAME_REGEX.test(e.target.value)){
+                      if (!NAME_REGEX.test(e.target.value)) {
                         setfirstname(e.target.value);
-                        const x=document.querySelector('.name-error')
-                        x.style.visibility="hidden";
-                      }
-                      else{
-                        document.querySelector('.name-error').style.visibility=""
-                     //   x.style.visibility="block";
+                        const x = document.querySelector(".name-error");
+                        x.style.visibility = "hidden";
+                      } else {
+                        document.querySelector(".name-error").style.visibility =
+                          "";
+                        //   x.style.visibility="block";
                       }
                     }}
                   />
@@ -138,78 +130,104 @@ export const SignUp = () => {
                     placeholder="LAST NAME"
                     value={lastname}
                     onChange={(e) => {
-                      if(!NAME_REGEX.test(e.target.value)){
+                      if (!NAME_REGEX.test(e.target.value)) {
                         setlastname(e.target.value);
-                        const x=document.querySelector('.name-error')
-                        x.style.visibility="hidden";
-                      }
-                      else{
-                        document.querySelector('.name-error').style.visibility=""
-                     //   x.style.visibility="block";
+                        const x = document.querySelector(".name-error");
+                        x.style.visibility = "hidden";
+                      } else {
+                        document.querySelector(".name-error").style.visibility =
+                          "";
+                        //   x.style.visibility="block";
                       }
                     }}
                   />
                 </div>
 
-                <span className="text-red-300 name-error" style={{"visibility":"hidden"}}>*Invalid characters not allowed</span>
+                <span
+                  className="text-red-300 name-error"
+                  style={{ visibility: "hidden" }}
+                >
+                  *Invalid characters not allowed
+                </span>
               </div>
               <div className="flex flex-col">
                 <input
                   className="p-2 border-gray-400 border rounded-md "
                   type="number"
                   placeholder="Enter Age"
-                  value={Age}
+                  value={age}
                   min={1}
-                  onChange={(e) => setAge(e.target.value)}
+                  onChange={(e) => setage(e.target.value)}
                 />
-                <span className="text-red-300 age-error" style={{"visibility":"hidden"}}>*Mandatory Fields</span>
+                <span
+                  className="text-red-300 age-error"
+                  style={{ visibility: "hidden" }}
+                >
+                  *Mandatory Fields
+                </span>
               </div>
               <div className="flex flex-col">
                 <input
                   className="p-2 border-gray-400 border rounded-md "
                   type="tel"
                   placeholder="Enter Mobile No."
-                  value={Mobileno}
+                  value={mobileno}
                   onChange={(e) => {
-                    if(!PHONE_REGEX.test(e.target.value)){
-                      setMobileno(e.target.value);
-                      document.querySelector('.phone-error').style.visibility="hidden"
-                    }
-                    else{
-                      console.log("invalid input",e.target.value)
-                      document.querySelector('.phone-error').style.visibility=""
+                    if (!PHONE_REGEX.test(e.target.value)) {
+                      setmobileno(e.target.value);
+                      document.querySelector(".phone-error").style.visibility =
+                        "hidden";
+                    } else {
+                      console.log("invalid input", e.target.value);
+                      document.querySelector(".phone-error").style.visibility =
+                        "";
                     }
                   }}
                 />
-                <span className="text-red-300 phone-error" style={{"visibility":"hidden"}}>*Mandatory Fields</span>
+                <span
+                  className="text-red-300 phone-error"
+                  style={{ visibility: "hidden" }}
+                >
+                  *Mandatory Fields
+                </span>
               </div>
               <div className="flex flex-col">
                 <input
                   className="p-2 border-gray-400 border rounded-md"
                   type="email"
                   placeholder="Enter Email Address"
-                  value={Email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  onChange={(e) => setemail(e.target.value)}
                 />
-                <span className="text-red-300 email-error" style={{"visibility":"hidden"}}>*Mandatory Fields</span>
+                <span
+                  className="text-red-300 email-error"
+                  style={{ visibility: "hidden" }}
+                >
+                  *Mandatory Fields
+                </span>
               </div>
               <div className="flex flex-col">
                 <input
                   className="p-2 border-gray-400 border rounded-md"
                   type="password"
                   placeholder="Choose Password"
-                  value={Password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  onChange={(e) => setpassword(e.target.value)}
                 />
-                <span className="text-red-300 password-error" style={{"visibility":"hidden"}}>*Mandatory Fields</span>
+                <span
+                  className="text-red-300 password-error"
+                  style={{ visibility: "hidden" }}
+                >
+                  *Mandatory Fields
+                </span>
               </div>
               <div className="flex flex-col">
                 <div>
                   <input
                     type="checkbox"
                     className="  border border-gray-400 mx-2"
-                    value={Checked}
-                    onChange={() => setChecked(!Checked)}
+                    value={checked}
+                    onChange={() => setchecked(!checked)}
                   />
                   <span>
                     I accept the
